@@ -2,8 +2,8 @@ import Foundation
 
 public enum RequestCreator {
     case `default`
-    // TODO: Setting timeout
-    func createURLRequest(with request: RequestWithQueryParams) -> URLRequest {
+
+    public func createURLRequest(with request: RequestWithQueryParams) -> URLRequest {
         let url = request.url.addQueryParameters(request.queryParams)
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.httpMethod.rawValue
@@ -17,7 +17,7 @@ public enum RequestCreator {
         return urlRequest
     }
 
-    func createURLRequest(with request: RequestWithBody) -> URLRequest {
+    public func createURLRequest(with request: RequestWithBody) -> URLRequest {
         var urlRequest = URLRequest(url: request.url)
         urlRequest.httpMethod = request.httpMethod.rawValue
         // Headers
