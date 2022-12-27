@@ -5,8 +5,8 @@ public protocol Requestable {
     func request<T: Codable>(_ request: URLRequest) -> AnyPublisher<T, NetworkError>
 }
 
-public extension Requestable {
-    func request<T: Codable>(_ request: URLRequest) -> AnyPublisher<T, NetworkError> {
+extension Requestable {
+    public func request<T: Codable>(_ request: URLRequest) -> AnyPublisher<T, NetworkError> {
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { (data, response) -> Data in
                 if let httpResponse = response as? HTTPURLResponse {

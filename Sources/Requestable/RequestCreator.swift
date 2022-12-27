@@ -32,19 +32,47 @@ public enum RequestCreator {
     }
 }
 
-public extension RequestCreator {
-    struct RequestWithQueryParams {
+extension RequestCreator {
+    public struct RequestWithQueryParams {
+
         let url: URL
         let httpMethod: HTTPMethod
-        var queryParams: [String: String] = [:]
-        var headers: [String: String] = [:]
+        let queryParams: [String: String]
+        let headers: [String: String]
+
+        public init(
+            url: URL,
+            httpMethod: HTTPMethod,
+            queryParams: [String: String] = [:],
+            headers: [String: String] = [:]
+        ){
+            self.url = url
+            self.httpMethod = httpMethod
+            self.queryParams = queryParams
+            self.headers = headers
+        }
     }
 
-    struct RequestWithBody {
+    public struct RequestWithBody {
+
         let url: URL
         let httpMethod: HTTPMethod
         let body: Data?
-        var headers: [String: String] = [:]
-        var contentType: NetworkContentType = .json
+        let headers: [String: String]
+        let contentType: NetworkContentType
+
+        public init(
+            url: URL,
+            httpMethod: HTTPMethod,
+            body: Data?,
+            headers: [String: String] = [:],
+            contentType: NetworkContentType = .json
+        ){
+            self.url = url
+            self.httpMethod = httpMethod
+            self.body = body
+            self.headers = headers
+            self.contentType = contentType
+        }
     }
 }
