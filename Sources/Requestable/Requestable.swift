@@ -7,7 +7,8 @@ public protocol Requestable {
 
 extension Requestable {
     public func request<T: Codable>(_ request: URLRequest) -> AnyPublisher<T, NetworkError> {
-        return URLSession.shared.dataTaskPublisher(for: request)
+        let session = Session.shared.session
+        return session.dataTaskPublisher(for: request)
             .tryMap { (data, response) -> Data in
                 if let httpResponse = response as? HTTPURLResponse {
                     guard (200..<300) ~= httpResponse.statusCode else {
