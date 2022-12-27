@@ -22,7 +22,7 @@ final class Session {
     required init() {
         let configuration = URLSession.shared.configuration
         timeout = TimeOut(request: 60, resource: 60)
-        session = URLSession(configuration: configuration)
+        session = URLSession(configuration: configuration, delegate: URLSessionPinningDelegate(), delegateQueue: nil)
     }
 
     struct TimeOut {
